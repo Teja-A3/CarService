@@ -1,5 +1,7 @@
 package com.hcl.carservicing.carservice.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -11,46 +13,51 @@ public class ServiceCenterServiceType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@ManyToOne
-	private ServiceCenter serviceCenter;
-
-	@ManyToOne
-	private ServiceType serviceType;
-
     @NotNull(message = "Cost is mandatory")
     @Min(value = 0, message = "Cost must be greater than or equal to 0")
     private Double cost;
 
-	public Long getId() {
-		return id;
-	}
+    // TODO: join table, validation
+    @ManyToOne
+    private ServiceCenter serviceCenter;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // TODO: join table, validation
+    @ManyToOne
+    private ServiceType serviceType;
 
-	public Double getCost() {
-		return cost;
-	}
+    // TODO: validation
+    @OneToMany(mappedBy = "service", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<ServicingRequest> servicingRequest;
 
-	public void setCost(Double cost) {
-		this.cost = cost;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public ServiceCenter getServiceCenter() {
-		return serviceCenter;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setServiceCenter(ServiceCenter serviceCenter) {
-		this.serviceCenter = serviceCenter;
-	}
+    public Double getCost() {
+        return cost;
+    }
 
-	public ServiceType getServiceType() {
-		return serviceType;
-	}
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
 
-	public void setServiceType(ServiceType serviceType) {
-		this.serviceType = serviceType;
-	}
+    public ServiceCenter getServiceCenter() {
+        return serviceCenter;
+    }
+
+    public void setServiceCenter(ServiceCenter serviceCenter) {
+        this.serviceCenter = serviceCenter;
+    }
+
+    public ServiceType getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
+    }
 }
-

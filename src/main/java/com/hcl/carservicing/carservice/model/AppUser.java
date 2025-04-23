@@ -61,7 +61,12 @@ public class AppUser {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-	@OneToMany(mappedBy = "user")
+	// TODO: validation
+	@OneToMany(
+		mappedBy = "user",
+		fetch = FetchType.EAGER,
+		cascade = { CascadeType.PERSIST, CascadeType.MERGE }
+	)
 	private List<ServicingRequest> servicingRequests;
 
 	public Long getId() {

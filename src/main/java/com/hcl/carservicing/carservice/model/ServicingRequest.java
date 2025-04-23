@@ -14,36 +14,40 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "servicing_request")
 public class ServicingRequest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-    @NotNull(message = "Start date is required")
-    @FutureOrPresent(message = "Please enter the date which is greater than previous day’s date")
-    private LocalDate startDate;
-    
-    @NotNull(message = "End date is required")
-    @FutureOrPresent(message = "Please enter the date which is greater than start date")
-    private LocalDate endDate;
+	@NotNull(message = "Start date is required")
+	@FutureOrPresent(message = "Please enter the date which is greater than previous day’s date")
+	private LocalDate startDate;
 
-    @Enumerated(EnumType.STRING)
-    private RequestStatus status;
+	@NotNull(message = "End date is required")
+	@FutureOrPresent(message = "Please enter the date which is greater than start date")
+	private LocalDate endDate;
 
-	@OneToOne
+	@Enumerated(EnumType.STRING)
+	private RequestStatus status;
+
+	// TODO: joinColumn, validation
+	@ManyToOne
 	private AppUser user;
 
-	@OneToOne(mappedBy = "servicingRequest")
+	// TODO: joinColumn, validation
+	@ManyToOne
 	private DeliveryBoy deliveryBoy;
 
-	@OneToOne(mappedBy = "servicingRequest")
+	// TODO: joinColumn, validation
+	@ManyToOne
 	private ServiceCenterServiceType service;
 
+	// TODO: joinColumn, validation
 	@ManyToOne
 	private ServiceCenter serviceCenter;
-    
+
 	public Long getId() {
 		return id;
 	}
@@ -116,4 +120,3 @@ public class ServicingRequest {
 		this.serviceCenter = serviceCenter;
 	}
 }
-

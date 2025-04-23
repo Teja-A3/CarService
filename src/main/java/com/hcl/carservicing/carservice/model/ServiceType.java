@@ -1,9 +1,13 @@
 package com.hcl.carservicing.carservice.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,33 +22,44 @@ public class ServiceType {
     @NotBlank(message = "Service name is required")
     @Size(min = 3, max = 100, message = "Service name must be between 3 and 100 characters")
     private String serviceName;
-    
+
     @NotBlank(message = "Service Description is required")
     @Size(max = 255, message = "Description must not exceed 255 characters")
     private String description;
 
-	public Long getId() {
-		return id;
-	}
+    // TODO: join table, validation
+    @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
+    private List<ServiceCenterServiceType> serviceCenterServiceTypes;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getServiceName() {
-		return serviceName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
-	}
+    public String getServiceName() {
+        return serviceName;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<ServiceCenterServiceType> getServiceCenterServiceTypes() {
+        return serviceCenterServiceTypes;
+    }
+
+    public void setServiceCenterServiceTypes(List<ServiceCenterServiceType> serviceCenterServiceTypes) {
+        this.serviceCenterServiceTypes = serviceCenterServiceTypes;
+    }
 }
-
