@@ -72,11 +72,11 @@ enum UserRole {
 ServiceCenterServiceType "0..*" -- "1" ServiceType : has
 
 ServiceRequest "0..*" --- "1" AppUser : has
-ServiceRequest "0..1" --- "0..1" DeliveryBoy : has
-ServiceRequest "1..*" --- "0..1" ServiceCenterServiceType : has
-ServiceRequest "0..1" --- "0..*" ServiceCenter : has
+ServiceRequest "0..*" --- "0..1" DeliveryBoy : has
+ServiceRequest "0..*" --- "1" ServiceCenterServiceType : has
+ServiceRequest "0..*" --- "1" ServiceCenter : has
 
-ServiceCenterServiceType "0..*" -- "0..*" ServiceCenter : has
-DeliveryBoy "0..*" -- "0..1" ServiceCenter : has
+ServiceCenterServiceType "0..*" -- "1" ServiceCenter : has
+DeliveryBoy "0..*" -- "1" ServiceCenter : has
 
 @enduml

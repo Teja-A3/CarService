@@ -55,11 +55,11 @@ public class DeliveryBoy {
         this.contactNumber = contactNumber;
     }
 
-    public ServicingRequest getServicingRequest() {
+    public List<ServicingRequest> getServicingRequest() {
         return servicingRequest;
     }
 
-    public void setServicingRequest(ServicingRequest servicingRequest) {
+    public void setServicingRequest(List<ServicingRequest> servicingRequest) {
         this.servicingRequest = servicingRequest;
     }
 
